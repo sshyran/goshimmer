@@ -2,6 +2,7 @@ package messagelayer
 
 import (
 	"sync"
+	"time"
 
 	"github.com/iotaledger/goshimmer/packages/shutdown"
 	"github.com/iotaledger/goshimmer/packages/tangle"
@@ -100,7 +101,9 @@ func configure(*node.Plugin) {
 	messageFactory.Events.Error.Attach(events.NewClosure(func(err error) {
 		log.Errorf("internal error in message factory: %v", err)
 	}))
-
+	// introduce artificial waiting time, replaces PoW for a sustainable testing
+	// time.Sleep(500 * time.Millisecond)
+	// end of change in code
 	// setup messageParser
 	messageParser.Events.MessageParsed.Attach(events.NewClosure(func(msgParsedEvent *tangle.MessageParsedEvent) {
 		// TODO: ADD PEER
@@ -119,6 +122,9 @@ func configure(*node.Plugin) {
 	// setup tipSelector
 	_tangle.Events.MessageSolid.Attach(events.NewClosure(func(cachedMsgEvent *tangle.CachedMessageEvent) {
 		cachedMsgEvent.MessageMetadata.Release()
+		// introduce an artificial waiting time
+		time.Sleep(1 * time.Second)
+		//
 		cachedMsgEvent.Message.Consume(tipSelector.AddTip)
 	}))
 
