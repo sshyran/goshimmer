@@ -46,40 +46,40 @@ type valuetangle struct {
 func NewRealValueTangle() *valuetangle {
 	v := &valuetangle{}
 
-	v.txConfirmedClosure = events.NewClosure(func(ctx *transaction.CachedTransaction, ctxMeta *tangle.CachedTransactionMetadata) {
-		defer ctx.Release()
-		defer ctxMeta.Release()
+	v.txConfirmedClosure = events.NewClosure(func(e *tangle.CachedTransactionEvent) {
+		defer e.Transaction.Release()
+		defer e.TransactionMetadata.Release()
 
 		if v.txConfirmedCallback == nil {
 			return
 		}
-		if tx := ctx.Unwrap(); tx != nil {
+		if tx := e.Transaction.Unwrap(); tx != nil {
 			v.txConfirmedCallback(tx)
 		}
 	})
 	valuetransfers.Tangle().Events.TransactionConfirmed.Attach(v.txConfirmedClosure)
 
-	v.txBookedClosure = events.NewClosure(func(ctx *transaction.CachedTransaction, ctxMeta *tangle.CachedTransactionMetadata, decisionPending bool) {
-		defer ctx.Release()
-		defer ctxMeta.Release()
+	v.txBookedClosure = events.NewClosure(func(e *tangle.CachedTransactionBookEvent) {
+		defer e.Transaction.Release()
+		defer e.TransactionMetadata.Release()
 
 		if v.txBookedCallback == nil {
 			return
 		}
-		if tx := ctx.Unwrap(); tx != nil {
-			v.txBookedCallback(tx, decisionPending)
+		if tx := e.Transaction.Unwrap(); tx != nil {
+			v.txBookedCallback(tx, e.Pending)
 		}
 	})
 	valuetransfers.Tangle().Events.TransactionBooked.Attach(v.txBookedClosure)
 
-	v.txRejectedClosure = events.NewClosure(func(ctx *transaction.CachedTransaction, ctxMeta *tangle.CachedTransactionMetadata) {
-		defer ctx.Release()
-		defer ctxMeta.Release()
+	v.txRejectedClosure = events.NewClosure(func(e *tangle.CachedTransactionEvent) {
+		defer e.Transaction.Release()
+		defer e.TransactionMetadata.Release()
 
 		if v.txRejectedCallback == nil {
 			return
 		}
-		if tx := ctx.Unwrap(); tx != nil {
+		if tx := e.Transaction.Unwrap(); tx != nil {
 			v.txRejectedCallback(tx)
 		}
 	})
