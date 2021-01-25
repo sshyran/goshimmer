@@ -63,6 +63,7 @@ func (b *Broker) GetConfig() *broker.Config {
 	return b.config
 }
 
+// HasSubscribers returns true if the given topic has subscribers.
 func (b *Broker) HasSubscribers(topic string) bool {
 	return b.topicManager.hasSubscribers(topic)
 }

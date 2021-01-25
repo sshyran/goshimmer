@@ -5,10 +5,10 @@ import (
 )
 
 const (
-	// the bind address on which the MQTT broker listens on
+	// CfgMQTTBindAddress is the bind address on which the MQTT broker listens on
 	CfgMQTTBindAddress = "mqtt.bindAddress"
 
-	// the port of the WebSocket MQTT broker
+	// CfgMQTTWSPort is the port of the WebSocket MQTT broker
 	CfgMQTTWSPort = "mqtt.wsPort"
 )
 

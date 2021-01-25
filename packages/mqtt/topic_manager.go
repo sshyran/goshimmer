@@ -7,7 +7,10 @@ import (
 	"github.com/fhmq/hmq/broker/lib/topics"
 )
 
+// OnSubscribeHandler is the subscribe handler.
 type OnSubscribeHandler func(topic []byte)
+
+// OnUnsubscribeHandler is the unsubscribe handler.
 type OnUnsubscribeHandler func(topic []byte)
 
 // topicManager registers itself instead of the normal memtopic and implements the TopicsProvider interface.
