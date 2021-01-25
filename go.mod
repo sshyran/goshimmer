@@ -8,6 +8,8 @@ require (
 	github.com/dgraph-io/badger/v2 v2.0.3
 	github.com/drand/drand v1.1.1
 	github.com/drand/kyber v1.1.2
+	github.com/eclipse/paho.mqtt.golang v1.3.1
+	github.com/fhmq/hmq v0.0.0-20200826092422-b8bacb4c3d2c
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.4.3
@@ -27,7 +29,6 @@ require (
 	github.com/spf13/viper v1.7.0
 	github.com/stretchr/testify v1.6.1
 	github.com/valyala/fasttemplate v1.1.0 // indirect
-	github.com/xdg/stringprep v1.0.0 // indirect
 	go.dedis.ch/kyber/v3 v3.0.13
 	go.mongodb.org/mongo-driver v1.3.4
 	go.uber.org/atomic v1.7.0

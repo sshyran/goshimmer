@@ -1,6 +1,7 @@
 package plugins
 
 import (
+	"github.com/iotaledger/goshimmer/plugins/mqtt"
 	"github.com/iotaledger/goshimmer/plugins/webapi"
 	"github.com/iotaledger/goshimmer/plugins/webapi/autopeering"
 	"github.com/iotaledger/goshimmer/plugins/webapi/data"
@@ -26,4 +27,5 @@ var WebAPI = node.Plugins(
 	info.Plugin(),
 	value.Plugin(),
 	tools.Plugin(),
+	mqtt.Plugin(),
 )

@@ -57,6 +57,8 @@ services:
       - "127.0.0.1:8080:8080/tcp" # web API
       - "127.0.0.1:8081:8081/tcp" # dashboard
       - "127.0.0.1:9311:9311/tcp" # prometheus
+      - "127.0.0.1:1883:1883/tcp" # mqtt
+      - "127.0.0.1:1888:1888/tcp" # ws-mqtt
     depends_on:
       - entry_node
 
