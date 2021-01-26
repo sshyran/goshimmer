@@ -101,6 +101,7 @@ func configure(*node.Plugin) {
 	messageFactory.Events.Error.Attach(events.NewClosure(func(err error) {
 		log.Errorf("internal error in message factory: %v", err)
 	}))
+	// TODO can this be removed here now?
 	// introduce artificial waiting time, replaces PoW for a sustainable testing
 	// time.Sleep(500 * time.Millisecond)
 	// end of change in code
@@ -124,7 +125,6 @@ func configure(*node.Plugin) {
 		cachedMsgEvent.MessageMetadata.Release()
 		// introduce an artificial waiting time
 		time.Sleep(1 * time.Second)
-		//
 		cachedMsgEvent.Message.Consume(tipSelector.AddTip)
 	}))
 

@@ -59,6 +59,30 @@ services:
     depends_on:
       - entry_node
 
+  peer_observer:
+    container_name: peer_observer
+    image: golang:1.15.5
+    stop_grace_period: 1m
+    entrypoint: /go/bin/main
+    command: >
+      --config=/tmp/config.json
+      --database.directory=/tmp/mainnetdb
+      --node.enablePlugins=bootstrap,spammer
+      --valueLayer.snapshot.file=/tmp/assets/7R1itJx5hVuo9w9hjg5cwKFmek4HMSoBDgJZN8hKGxih.bin
+      --node.disablePlugins=clock
+      --faucet.seed=7R1itJx5hVuo9w9hjg5cwKFmek4HMSoBDgJZN8hKGxih
+      --valueLayer.snapshot.file=/tmp/assets/7R1itJx5hVuo9w9hjg5cwKFmek4HMSoBDgJZN8hKGxih.bin
+      --syncbeaconfollower.followNodes=EYsaGXnUVA9aTYL9FwYEvoQ8d1HCJveQVL7vogu6pqCP
+    volumes:
+      - ./config.docker.json:/tmp/config.json:ro
+      - goshimmer-cache:/go
+      - ../integration-tests/assets:/tmp/assets
+    ports:
+      - "127.0.0.1:8090:8080/tcp" # web API
+      - "127.0.0.1:8091:8081/tcp" # dashboard
+    depends_on:
+      - entry_node
+
   peer_replica:
     image: golang:1.15.5
     stop_grace_period: 1m
