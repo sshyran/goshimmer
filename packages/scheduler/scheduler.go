@@ -3,7 +3,7 @@ package scheduler
 // inbox buffered channel
 // list for managing message with timestamps in the future
 // multi-map
-// outbox buffered channel
+// outbox buffered channel / workerpool triggering an event
 
 // channel for the inbox
 // Outside of the scheduker, you fetch and evaluate if it has booked parent, otherswise you skip it (also the timestamp)
