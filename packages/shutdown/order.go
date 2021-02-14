@@ -3,14 +3,12 @@ package shutdown
 const (
 	// PriorityDatabase defines the shutdown priority for the database.
 	PriorityDatabase = iota
-	// PriorityFPC defines the shutdown priority for FPC.
-	PriorityFPC
 	// PriorityTangle defines the shutdown priority for the tangle.
 	PriorityTangle
-        // PriorityWaspConn defines the shutdown priority for waspconn.
-	PriorityWaspConn
-	// PriorityMissingMessagesMonitoring defines the shutdown priority for missing message monitor.
-	PriorityMissingMessagesMonitoring
+	// PriorityValueTangle defines the shutdown priority for the value tangle.
+	PriorityValueTangle
+	// PriorityFPC defines the shutdown priority for FPC.
+	PriorityFPC
 	// PriorityFaucet defines the shutdown priority for the faucet.
 	PriorityFaucet
 	// PriorityRemoteLog defines the shutdown priority for remote log.
