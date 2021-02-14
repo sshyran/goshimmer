@@ -195,6 +195,6 @@ func (v *valuetangle) RequestFunds(target address.Address) error {
 	if err != nil {
 		return err
 	}
-	_, err = messagelayer.MessageFactory().IssuePayload(faucetPayload)
+	_, err = messagelayer.Tangle().MessageFactory.IssuePayload(faucetPayload)
 	return err
 }

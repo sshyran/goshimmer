@@ -118,17 +118,13 @@ func runPlugin(_ *node.Plugin) {
 
 		<-shutdownSignal
 
-		//log.Infof("stop WaspConn plugin..")
 		log.Infof("Detaching WaspConn from the Value Tangle..")
 		go func() {
 			vtangle.Detach()
 			log.Infof("Detaching WaspConn from the Value Tangle..Done")
 		}()
 
-		//log.Infof("Stopping WaspConn listener..")
-		//_ = listener.Close()
-		//log.Infof("Stopping WaspConn listener.. Done")
-	}, shutdown.PriorityWaspConn)
+	}, shutdown.PriorityValueTangle) // TODO proper shutdown priority
 	if err != nil {
 		log.Errorf("failed to start WaspConn daemon: %v", err)
 	}

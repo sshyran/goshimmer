@@ -58,7 +58,7 @@ func Run(conn net.Conn, log *logger.Logger, vtangle valuetangle.ValueTangle) {
 		}
 
 		go wconn.detach()
-	}, shutdown.PriorityWaspConn)
+	}, shutdown.PriorityValueTangle) // TODO proper priority
 
 	if err != nil {
 		close(wconn.exitConnChan)
