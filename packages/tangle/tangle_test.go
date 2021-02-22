@@ -150,11 +150,11 @@ func TestTangle_MissingMessages(t *testing.T) {
 	)
 
 	// create badger store
-	badgerDB, err := testutil.BadgerDB(t)
+	pebbleDB, err := testutil.PebbleDB(t)
 	require.NoError(t, err)
 
 	// create the tangle
-	tangle := New(Store(badgerDB), WithoutOpinionFormer(true))
+	tangle := New(Store(pebbleDB), WithoutOpinionFormer(true))
 	defer tangle.Shutdown()
 	require.NoError(t, tangle.Prune())
 
@@ -296,7 +296,7 @@ func TestTangle_Flow(t *testing.T) {
 		messageWorkerQueueSize = 1000
 	)
 	// create badger store
-	badgerDB, err := testutil.BadgerDB(t)
+	pebbleDB, err := testutil.PebbleDB(t)
 	require.NoError(t, err)
 
 	// map to keep track of the tips
@@ -304,7 +304,7 @@ func TestTangle_Flow(t *testing.T) {
 	tips.Set(EmptyMessageID, EmptyMessageID)
 
 	// create the tangle
-	tangle := New(Store(badgerDB))
+	tangle := New(Store(pebbleDB))
 	defer tangle.Shutdown()
 
 	// create local peer
