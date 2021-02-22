@@ -86,7 +86,7 @@ type InclusionState struct {
 
 // UnlockBlock defines the struct of a signature.
 type UnlockBlock struct {
-	Version   byte   `json:"version"`
-	PublicKey string `json:"publicKey"`
-	Signature string `json:"signature"`
+	Type      ledgerstate.SignatureType `json:"type"`
+	PublicKey string                    `json:"publicKey"`
+	Signature string                    `json:"signature"`
 }

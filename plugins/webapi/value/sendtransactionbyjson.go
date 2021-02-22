@@ -148,7 +148,7 @@ func NewTransactionFromJSON(request SendTransactionByJSONRequest) (*ledgerstate.
 	// add signatures
 	unlockBlocks := make(ledgerstate.UnlockBlocks, len(request.UnlockBlocks))
 	for i, signature := range request.UnlockBlocks {
-		switch ledgerstate.SignatureType(signature.Version) {
+		switch ledgerstate.SignatureType(signature.Type) {
 
 		case ledgerstate.ED25519SignatureType:
 			pubKeyBytes, err := base58.Decode(signature.PublicKey)
