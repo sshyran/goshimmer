@@ -501,6 +501,11 @@ func (t *TransactionEssence) Payload() payload.Payload {
 	return t.payload
 }
 
+// SetPayload set the optional Payload of the TransactionEssence.
+func (t *TransactionEssence) SetPayload(p payload.Payload) {
+	t.payload = p
+}
+
 // Bytes returns a marshaled version of the TransactionEssence.
 func (t *TransactionEssence) Bytes() []byte {
 	marshalUtil := marshalutil.New().

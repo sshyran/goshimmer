@@ -84,8 +84,8 @@ type InclusionState struct {
 	Preferred   bool `json:"preferred,omitempty"`
 }
 
-// Signature defines the struct of a signature.
-type Signature struct {
+// UnlockBlock defines the struct of a signature.
+type UnlockBlock struct {
 	Version   byte   `json:"version"`
 	PublicKey string `json:"publicKey"`
 	Signature string `json:"signature"`
