@@ -95,9 +95,7 @@ func (s *Scheduler) start() {
 					}
 				}
 				delete(s.parentsMap, messageID)
-			default:
-			}
-			select {
+
 			// try to schedule messsage that have been waiting and are now current.
 			case message := <-s.timeQueue.C:
 				s.trySchedule(message)
