@@ -84,21 +84,8 @@ func (s *Scheduler) start() {
 	go func() {
 		s.timeQueue.Start()
 		for {
+			// always check messagedBooked first
 			select {
-
-			// read message from the inbox, add them to the timeQueue if their timestamp
-			// is in the future or schedule it if its parents have been booked already.
-			case message := <-s.inbox:
-				if message != nil && message.issuingTime.After(clock.SyncedTime()) {
-					s.timeQueue.Add(message)
-					break
-				}
-				s.trySchedule(message)
-
-			// try to schedule messsage that have been waiting and are now current.
-			case message := <-s.timeQueue.C:
-				s.trySchedule(message)
-
 			// schedule messages that were waiting for their parents to be booked.
 			case messageID := <-s.messagesBooked:
 				for _, child := range s.parentsMap[messageID] {
@@ -108,6 +95,21 @@ func (s *Scheduler) start() {
 					}
 				}
 				delete(s.parentsMap, messageID)
+			default:
+			}
+			select {
+			// try to schedule messsage that have been waiting and are now current.
+			case message := <-s.timeQueue.C:
+				s.trySchedule(message)
+
+			// read message from the inbox, add them to the timeQueue if their timestamp
+			// is in the future or schedule it if its parents have been booked already.
+			case message := <-s.inbox:
+				if message != nil && message.issuingTime.After(clock.SyncedTime()) {
+					s.timeQueue.Add(message)
+					break
+				}
+				s.trySchedule(message)
 
 			case <-s.close:
 				return

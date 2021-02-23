@@ -99,6 +99,57 @@ func configure(*node.Plugin) {
 	avgNetworkDelay := config.Node().Int(CfgMessageLayerFCOBAverageNetworkDelay)
 	tangle.LikedThreshold = (time.Duration(avgNetworkDelay) * time.Second)
 	tangle.LocallyFinalizedThreshold = (time.Duration(avgNetworkDelay*2) * time.Second)
+
+	Tangle().Parser.Events.MessageRejected.Attach(events.NewClosure(func(msgRejectedEvent *tangle.MessageRejectedEvent, _ error) {
+		log.Infof("rejected by filter %s", msgRejectedEvent.Message.ID())
+	}))
+
+	Tangle().Parser.Events.MessageParsed.Attach(events.NewClosure(func(msgParsedEvent *tangle.MessageParsedEvent) {
+		log.Infof("parsed message %s", msgParsedEvent.Message.ID())
+	}))
+
+	// message invalid events
+	Tangle().Events.MessageInvalid.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("message invalid: %s", messageID)
+	}))
+
+	Tangle().Storage.Events.MessageStored.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("message stored: %s", messageID)
+
+	}))
+
+	// increase the counter when a missing message was detected
+	Tangle().Solidifier.Events.MessageMissing.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("missing message: %s", messageID)
+	}))
+
+	// decrease the counter when a missing message was received
+	Tangle().Storage.Events.MissingMessageStored.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("missing message stored: %s", messageID)
+	}))
+
+	Tangle().Solidifier.Events.MessageSolid.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("solid: %s", messageID)
+		//Tangle().Storage.MessageMetadata(messageID).Consume(func(messageMetadata *tangle.MessageMetadata) {
+		//	log.Info(messageMetadata)
+		//})
+	}))
+
+	Tangle().Scheduler.Events.MessageScheduled.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("scheduled: %s", messageID)
+	}))
+
+	Tangle().Booker.Events.MessageBooked.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("booked: %s", messageID)
+	}))
+
+	Tangle().OpinionFormer.Events.MessageOpinionFormed.Attach(events.NewClosure(func(messageID tangle.MessageID) {
+		log.Infof("opinion formed: %s", messageID)
+	}))
+
+	Tangle().Events.Error.Attach(events.NewClosure(func(err error) {
+		log.Errorf("error in Tangle: %s", err)
+	}))
 }
 
 func run(*node.Plugin) {
