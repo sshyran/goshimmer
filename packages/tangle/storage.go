@@ -301,6 +301,7 @@ func (s *Storage) Shutdown() {
 	s.approverStorage.Shutdown()
 	s.missingMessageStorage.Shutdown()
 	s.attachmentStorage.Shutdown()
+	s.markerIndexBranchIDMappingStorage.Shutdown()
 
 	close(s.shutdown)
 }
@@ -319,6 +320,8 @@ func (s *Storage) Prune() error {
 			return err
 		}
 	}
+
+	s.storeGenesis()
 
 	return nil
 }
