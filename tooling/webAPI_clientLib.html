@@ -168,6 +168,57 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="webapi---clientlib"><a class="header" href="#webapi---clientlib">WebAPI - clientLib</a></h1>
+<p>The web API interface allows to access functionality of the node software via exposed http endpoints.</p>
+<h2 id="how-to-use-the-api"><a class="header" href="#how-to-use-the-api">How to use the API</a></h2>
+<p>The default port to access the web API is set to <code>8080:8080/tcp</code> in <code>docker-compose.yml</code>, where the first port number is the internal port number within the node software, and the second for the access from an http port. An example where these two would be set to different values, or the external port is not utilized, can be found in the docker-network tool (see also the <code>docker-compose.yml</code> file in the docker-network tool folder).</p>
+<p>The server instance of the web API is contacted via <code>webapi.Server()</code>. Next we need to register a route with a matching handler.</p>
+<pre><code>webapi.Server().ROUTE(path string, h HandlerFunc)
+</code></pre>
+<p>where <code>ROUTE</code> will be replaced later in this documentation by <code>GET</code> or <code>POST</code>. The <code>HandlerFunc</code> defines a function to serve HTTP requests that gives access to the Context</p>
+<pre><code>func HandlerFunc(c Context) error
+</code></pre>
+<p>We can then use the Context to send a JSON response to the node: </p>
+<pre><code>JSON(statuscode int, i interface{}) error
+</code></pre>
+<p>An implementation example is shown later for the POST method.</p>
+<h2 id="get-and-post"><a class="header" href="#get-and-post">GET and POST</a></h2>
+<p>Two methods are currently used. First, with <code>GET</code> we register a new GET route for a handler function. The handler is accessed via the address <code>path</code>. The handler for a GET method can set the node to perform certain actions.</p>
+<pre><code>webapi.Server().GET(&quot;path&quot;, HandlerFunc)
+```	
+A command can be sent to the node software to the API, e.g. via command prompt: 
+</code></pre>
+<p>curl &quot;http://127.0.0.1:8080/path?command&quot;</p>
+<pre><code>
+$$ . $$
+
+Second, with `POST` we register a new POST route for a handler function. The handler can receive a JSON body input and send specific messages to the tangle.
+</code></pre>
+<p>webapi.Server().POST(&quot;path&quot;, HandlerFunc)</p>
+<pre><code>
+For example, the following Handler `broadcastData` sends a data message to the tangle
+</code></pre>
+<p>func broadcastData(c echo.Context) error {
+var request Request
+if err := c.Bind(&amp;request); err != nil {
+log.Info(err.Error())
+return c.JSON(http.StatusBadRequest, Response{Error: err.Error()})
+}</p>
+<pre><code>msg, err := issuer.IssuePayload(
+	payload.NewGenericDataPayload(request.Data), messagelayer.Tangle())
+if err != nil {
+	return c.JSON(http.StatusBadRequest, Response{Error: err.Error()})
+}
+return c.JSON(http.StatusOK, Response{ID: msg.ID().String()})
+</code></pre>
+<p>}</p>
+<pre><code>As an example the JSON body   
+</code></pre>
+<p>{
+&quot;data&quot;:&quot;HelloWor&quot;
+}</p>
+<pre><code>can be sent to `http://127.0.0.1:8080/data`, which will issue a data message containing &quot;HelloWor&quot; (note that in this  example the data input is size limited.)
+ 
+</code></pre>
 
                     </main>
 
