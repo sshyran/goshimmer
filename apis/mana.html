@@ -169,6 +169,36 @@
                     <main>
                         <h1 id="mana-api-methods"><a class="header" href="#mana-api-methods">Mana API Methods</a></h1>
 <p>The mana APIs provide methods for people to retrieve the amount of access/consensus mana of nodes and outputs, as well as the event logs.</p>
+<p>HTTP APIs:</p>
+<ul>
+<li><a href="#mana">/mana</a></li>
+<li><a href="#manaall">/mana/all</a></li>
+<li><a href="#manapercentile">/mana/percentile</a></li>
+<li><a href="#manaaccessonline">/mana/access/online</a></li>
+<li><a href="#manaconsensusonline">/mana/consensus/online</a></li>
+<li><a href="#manaaccessnhighest">/mana/access/nhighest</a></li>
+<li><a href="#manaconsensusnhighest">/mana/consensus/nhighest</a></li>
+<li><a href="#manapending">/mana/pending</a></li>
+<li><a href="#manaconsensuspast">/mana/consensus/past</a></li>
+<li><a href="#manaconsensuslogs">/mana/consensus/logs</a></li>
+<li><a href="#valueallowedmanapledge">/value/allowedManaPledge</a></li>
+</ul>
+<p>Client lib APIs:</p>
+<ul>
+<li><a href="#getownmana">GetOwnMana()</a></li>
+<li><a href="#getmanafullnodeid">GetManaFullNodeID()</a></li>
+<li><a href="#getmana-with-short-node-id">GetMana with short node ID()</a></li>
+<li><a href="#client-lib---getallmana">GetAllMana()</a></li>
+<li><a href="#client-lib---getmanapercentile">GetManaPercentile()</a></li>
+<li><a href="#client-lib---getonlineaccessmana">GetOnlineAccessMana()</a></li>
+<li><a href="#client-lib---getonlineconsensusmana">GetOnlineConsensusMana()</a></li>
+<li><a href="#client-lib---getnhighestaccessmana">GetNHighestAccessMana()</a></li>
+<li><a href="#client-lib---getnhighestconsensusmana">GetNHighestConsensusMana()</a></li>
+<li><a href="#client-lib---getpending">GetPending()</a></li>
+<li><a href="#client-lib---getpastconsensusmanavector">GetPastConsensusManaVector()</a></li>
+<li><a href="#client-lib---getconsensuseventlogs">GetConsensusEventLogs()</a></li>
+<li><a href="#client-lib---getallowedmanapledgenodeids">GetAllowedManaPledgeNodeIDs()</a></li>
+</ul>
 <h2 id="mana"><a class="header" href="#mana"><code>/mana</code></a></h2>
 <p>Get the access and consensus mana of the node.</p>
 <h3 id="parameters"><a class="header" href="#parameters">Parameters</a></h3>

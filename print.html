@@ -241,6 +241,36 @@ return c.JSON(http.StatusOK, Response{ID: msg.ID().String()})
 </code></pre>
 <h1 id="mana-api-methods"><a class="header" href="#mana-api-methods">Mana API Methods</a></h1>
 <p>The mana APIs provide methods for people to retrieve the amount of access/consensus mana of nodes and outputs, as well as the event logs.</p>
+<p>HTTP APIs:</p>
+<ul>
+<li><a href="apis/mana.html#mana">/mana</a></li>
+<li><a href="apis/mana.html#manaall">/mana/all</a></li>
+<li><a href="apis/mana.html#manapercentile">/mana/percentile</a></li>
+<li><a href="apis/mana.html#manaaccessonline">/mana/access/online</a></li>
+<li><a href="apis/mana.html#manaconsensusonline">/mana/consensus/online</a></li>
+<li><a href="apis/mana.html#manaaccessnhighest">/mana/access/nhighest</a></li>
+<li><a href="apis/mana.html#manaconsensusnhighest">/mana/consensus/nhighest</a></li>
+<li><a href="apis/mana.html#manapending">/mana/pending</a></li>
+<li><a href="apis/mana.html#manaconsensuspast">/mana/consensus/past</a></li>
+<li><a href="apis/mana.html#manaconsensuslogs">/mana/consensus/logs</a></li>
+<li><a href="apis/mana.html#valueallowedmanapledge">/value/allowedManaPledge</a></li>
+</ul>
+<p>Client lib APIs:</p>
+<ul>
+<li><a href="apis/mana.html#getownmana">GetOwnMana()</a></li>
+<li><a href="apis/mana.html#getmanafullnodeid">GetManaFullNodeID()</a></li>
+<li><a href="apis/mana.html#getmana-with-short-node-id">GetMana with short node ID()</a></li>
+<li><a href="apis/mana.html#client-lib---getallmana">GetAllMana()</a></li>
+<li><a href="apis/mana.html#client-lib---getmanapercentile">GetManaPercentile()</a></li>
+<li><a href="apis/mana.html#client-lib---getonlineaccessmana">GetOnlineAccessMana()</a></li>
+<li><a href="apis/mana.html#client-lib---getonlineconsensusmana">GetOnlineConsensusMana()</a></li>
+<li><a href="apis/mana.html#client-lib---getnhighestaccessmana">GetNHighestAccessMana()</a></li>
+<li><a href="apis/mana.html#client-lib---getnhighestconsensusmana">GetNHighestConsensusMana()</a></li>
+<li><a href="apis/mana.html#client-lib---getpending">GetPending()</a></li>
+<li><a href="apis/mana.html#client-lib---getpastconsensusmanavector">GetPastConsensusManaVector()</a></li>
+<li><a href="apis/mana.html#client-lib---getconsensuseventlogs">GetConsensusEventLogs()</a></li>
+<li><a href="apis/mana.html#client-lib---getallowedmanapledgenodeids">GetAllowedManaPledgeNodeIDs()</a></li>
+</ul>
 <h2 id="mana"><a class="header" href="#mana"><code>/mana</code></a></h2>
 <p>Get the access and consensus mana of the node.</p>
 <h3 id="parameters"><a class="header" href="#parameters">Parameters</a></h3>
