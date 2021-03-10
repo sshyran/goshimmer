@@ -168,6 +168,71 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="event-driven-model"><a class="header" href="#event-driven-model">Event driven model</a></h1>
+<p>Event driven model is popular approach often used for example in GUI applications, where a program is waiting for some external event to take place (e.g. mouse click) in order to perform some action.
+In case of GoShimmer there is no GUI, however it applies this architecture approach as it's really flexible and is used to handle communication with other nodes and other internal parts. 
+In GoShimmer some of those events can be e.g. arrival of new tangle message, peering request or plugin start. 
+When an event is triggered, an event handler (or a collection of handlers) is executed and the state of the application is updated as necessary.</p>
+<h2 id="glossary"><a class="header" href="#glossary">Glossary:</a></h2>
+<p>At first let's define some terms used further to avoid misunderstandings:</p>
+<ul>
+<li>
+<p>Event - represents the type of event (e.g. new message or peering request) as well as set of handlers and trigger functions. Each type of event is separately defined 
+which means that events are independent of each other - each event has its own set of handlers and is triggered separately.</p>
+</li>
+<li>
+<p>Event handler (callback) - is a function that is executed when an event of given type occurs. An event handler can accept multiple arguments (e.g. message ID or plugin) so that it can perform appropriate actions.
+Every handler must accept the same set of parameters. Each event has a different set of handlers (there can be multiple handlers) that are executed when the event is triggered.</p>
+</li>
+<li>
+<p>Trigger - is a method that triggers execution of event handlers with given parameter values.</p>
+</li>
+</ul>
+<h2 id="creating-new-event-with-custom-callbacks"><a class="header" href="#creating-new-event-with-custom-callbacks">Creating new event with custom callbacks</a></h2>
+<p>Below are the steps that show the example code necessary to create a custom event, attach a handler and trigger the event. </p>
+<ol>
+<li>Create a function that will call event handlers (handler caller) for a specific event. 
+Each event has only one handler caller. It enforces that all handlers for the event must share the same interface, because the caller will pass a fixed set of arguments of specific types to handler function. 
+It's not possible to pass different number of arguments or types to the handler function. 
+Callers for all events must also share the same interface - the first argument represents the handler function that will be called represented by a generic argument.
+Further arguments represent parameters that will be passed to the handler during execution. Below are example callers that accept one and two parameters respectively. 
+More arguments can be passed in similar manner. </li>
+</ol>
+<pre><code class="language-go">func singleArgCaller(handler interface{}, params ...interface{}) {
+    handler.(func (*Plugin))(params[0].(*Plugin))
+}
+
+func twoArgsCaller(handler interface{}, params ...interface{}) {
+    handler.(func(*peer.Peer, error))(params[0].(*peer.Peer), params[1].(error))
+}
+</code></pre>
+<p><code>handler.(func (*Plugin))(params[0].(*Plugin))</code> - this code seems a little complicated, so to make things simpler we will divide into smaller parts and explain each:</p>
+<ul>
+<li><code>handler.(func (*Plugin))</code> (A) - this part does type-cast the handler from generic type onto type of desired, specific function type - in this case it's a function that accepts <code>*Plugin</code> as its only parameter.</li>
+<li><code>params[0].(*Plugin)</code> (B)- similarly to previous part, first element of parameter slice is type-casted onto <code>*Plugin</code> type, so that it matches the handler function interface.</li>
+<li><code>handler.(func (*Plugin))(params[0].(*Plugin))</code> - the whole expression calls the type-casted handler function with the type-casted parameter value. We can also write this as <code>A(B)</code> to make things simpler.</li>
+</ul>
+<p>The above explanation also allows a better understanding of why all handlers must share the same interface - handler caller passes fixed number of parameters and does type-casting of arguments onto specific types.</p>
+<ol start="2">
+<li>Next, a new event object needs to be created. We pass the handler caller as an argument, which is saved inside the object to be called when the event is triggered.</li>
+</ol>
+<pre><code class="language-go">import &quot;github.com/iotaledger/hive.go/events&quot;
+
+ThisEvent := events.NewEvent(singleArgCaller)
+</code></pre>
+<ol start="3">
+<li>After creating the event, handlers (or callbacks) can be attached to it. An event can have multiple callbacks, however they all need to share the same interface. 
+One thing to note, is that functions are not passed directly - first they are wrapped into a <code>events.Closure</code> object like in the example below. </li>
+</ol>
+<pre><code class="language-go">ThisEvent.Attach(events.NewClosure(func (arg *Plugin) {
+    // do something
+}))
+</code></pre>
+<ol start="4">
+<li>In order to trigger the event with some parameters we need to run the <code>.Trigger</code> method on the event object with parameters that handler functions will receive:</li>
+</ol>
+<pre><code class="language-go">somePlugin Plugin
+ThisEvent.Trigger(&amp;somePlugin)
+</code></pre>
 
                     </main>
 
