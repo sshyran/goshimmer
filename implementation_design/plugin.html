@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../goshimmer.html"><strong aria-hidden="true">1.</strong> GoShimmer</a></li><li class="chapter-item expanded "><a href="../application_logic.html"><strong aria-hidden="true">2.</strong> Application logic</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../application_logic/protocol.html"><strong aria-hidden="true">2.1.</strong> Protocol high level overview</a></li></ol></li><li class="chapter-item expanded "><a href="../implementation_design.html"><strong aria-hidden="true">3.</strong> Implementation design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../implementation_design/event_driven_model.html"><strong aria-hidden="true">3.1.</strong> Event driven model</a></li><li class="chapter-item expanded "><a href="../implementation_design/packages_plugins.html"><strong aria-hidden="true">3.2.</strong> Packages and plugins</a></li><li class="chapter-item expanded "><a href="../implementation_design/configuration_parameters.html"><strong aria-hidden="true">3.3.</strong> Configuration parameters</a></li><li class="chapter-item expanded "><a href="../implementation_design/plugin.html" class="active"><strong aria-hidden="true">3.4.</strong> Plugin</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../implementation_design/plugin/init.html"><strong aria-hidden="true">3.4.1.</strong> Init</a></li><li class="chapter-item expanded "><a href="../implementation_design/plugin/configure.html"><strong aria-hidden="true">3.4.2.</strong> Configure</a></li><li class="chapter-item expanded "><a href="../implementation_design/plugin/run.html"><strong aria-hidden="true">3.4.3.</strong> Run</a></li></ol></li><li class="chapter-item expanded "><a href="../implementation_design/object_storage.html"><strong aria-hidden="true">3.5.</strong> Object storage</a></li></ol></li><li class="chapter-item expanded "><a href="../apis/webAPI_clientLib.html"><strong aria-hidden="true">4.</strong> WebAPI - clientLib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../apis/mana.html"><strong aria-hidden="true">4.1.</strong> Mana</a></li></ol></li><li class="chapter-item expanded "><a href="../tooling.html"><strong aria-hidden="true">5.</strong> Tooling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tooling/docker_private_network.html"><strong aria-hidden="true">5.1.</strong> Docker private network</a></li></ol></li><li class="chapter-item expanded "><a href="../specification.html"><strong aria-hidden="true">6.</strong> Specification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../specification/001-mana_proposal.html"><strong aria-hidden="true">6.1.</strong> Mana Proposal</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../goshimmer.html"><strong aria-hidden="true">1.</strong> GoShimmer</a></li><li class="chapter-item expanded "><a href="../application_logic.html"><strong aria-hidden="true">2.</strong> Application logic</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../application_logic/protocol.html"><strong aria-hidden="true">2.1.</strong> Protocol high level overview</a></li></ol></li><li class="chapter-item expanded "><a href="../implementation_design.html"><strong aria-hidden="true">3.</strong> Implementation design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../implementation_design/event_driven_model.html"><strong aria-hidden="true">3.1.</strong> Event driven model</a></li><li class="chapter-item expanded "><a href="../implementation_design/packages_plugins.html"><strong aria-hidden="true">3.2.</strong> Packages and plugins</a></li><li class="chapter-item expanded "><a href="../implementation_design/configuration_parameters.html"><strong aria-hidden="true">3.3.</strong> Configuration parameters</a></li><li class="chapter-item expanded "><a href="../implementation_design/plugin.html" class="active"><strong aria-hidden="true">3.4.</strong> Plugin</a></li><li class="chapter-item expanded "><a href="../implementation_design/object_storage.html"><strong aria-hidden="true">3.5.</strong> Object storage</a></li></ol></li><li class="chapter-item expanded "><a href="../apis/webAPI_clientLib.html"><strong aria-hidden="true">4.</strong> WebAPI - clientLib</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../apis/mana.html"><strong aria-hidden="true">4.1.</strong> Mana</a></li></ol></li><li class="chapter-item expanded "><a href="../tooling.html"><strong aria-hidden="true">5.</strong> Tooling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tooling/docker_private_network.html"><strong aria-hidden="true">5.1.</strong> Docker private network</a></li></ol></li><li class="chapter-item expanded "><a href="../specification.html"><strong aria-hidden="true">6.</strong> Specification</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../specification/001-mana_proposal.html"><strong aria-hidden="true">6.1.</strong> Mana Proposal</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -169,7 +169,7 @@
                     <main>
                         <h1 id="plugin-system"><a class="header" href="#plugin-system">Plugin system</a></h1>
 <p>GoShimmer is a complex application that is used in a research environment where requirements often changed and new ideas arise. 
-Plugin system allows to quickly and easily add and remove modules that need to be started. However, one thing that might be non-intuitive about the use of plugins is that it's taken to an extreme - everything is run through plugins. 
+The Plugin system allows to quickly and easily add and remove modules that need to be started. However, one thing that might be non-intuitive about the use of plugins is that it's taken to an extreme - everything is run through plugins. 
 The only code that is not executed through a plugin system is the code responsible for configuring and starting the plugins.
 All new future features added to the GoShimmer must be added by creating a new plugin. </p>
 <h2 id="plugin-structure"><a class="header" href="#plugin-structure">Plugin structure</a></h2>
@@ -192,13 +192,13 @@ All new future features added to the GoShimmer must be added by creating a new p
 </ul>
 <h2 id="plugin-events"><a class="header" href="#plugin-events">Plugin events</a></h2>
 <p>Each plugin defines 3 events: <code>Init</code>, <code>Configure</code>, <code>Run</code>. 
-Those events are triggered during different stages of node startup, but plugin doesn't have to define handlers for all of those events in order to do what it's been designed for.
+Those events are triggered during different stages of node startup, but the plugin doesn't have to define handlers for all of those events in order to do what it's been designed for.
 Execution order and purpose of each event is described below: </p>
 <ol>
 <li><code>Init</code> - is triggered almost immediately after a node is started. It's used in plugins that are critical for GoShimmer such as reading config file or initializing global logger. Most plugins don't need to use this event.</li>
 <li><code>Configure</code> - this event is used to configure the plugin before it is started. It is used to define events related to internal plugin logic or initialize objects used by the plugin. </li>
-<li><code>Run</code> - this event is triggered as the last one. The event handler function contains main logic of the plugin. 
-For many plugins, the event handler function creates a separate worker that works in the background, so that the handler function for one plugin can finish and allow other plugins be started.</li>
+<li><code>Run</code> - this event is triggered as the last one. The event handler function contains the main logic of the plugin. 
+For many plugins, the event handler function creates a separate worker that works in the background, so that the handler function for one plugin can finish and allow other plugins to be started.</li>
 </ol>
 <p>Each event could potentially have more than one handler, however currently all existing plugins follow a convention where each event has only one handler.</p>
 <p>It is important to note that each event is triggered for all plugins sequentially, so that the event <code>Init</code> is triggered for all plugins, then <code>Configure</code> is triggered for all plugins and finally <code>Run</code>. 
@@ -217,11 +217,11 @@ The object needs to be passed so that the handler function can access plugin fie
 <h2 id="creating-new-plugin"><a class="header" href="#creating-new-plugin">Creating new plugin</a></h2>
 <p>A plugin object can be created by calling the <code>node.NewPlugin</code> method. 
 The method creates and returns a new plugin object, as well as registers it so that GoShimmer knows the plugin is available.
-It accepts following arguments:</p>
+It accepts the following arguments:</p>
 <ul>
 <li><code>name string</code> - plugin name.</li>
 <li><code>status int</code> - flag indicating whether plugin is enabled or disabled by default. This can be overridden by enabling/disabling the plugin in the external configuration file. Possible values: <code>node.Enabled</code>, <code>node.Disabled</code>. </li>
-<li><code>callbacks ...Callback</code> - list of event handler functions. Method will correctly create a plugin when passing up to 2 callbacks. Note: <code>type Callback = func(plugin *Plugin)</code>, which is a raw function type without being wrapped in <code>events.Closure</code>.</li>
+<li><code>callbacks ...Callback</code> - list of event handler functions. The method will correctly create a plugin when passing up to 2 callbacks. Note: <code>type Callback = func(plugin *Plugin)</code>, which is a raw function type without being wrapped in <code>events.Closure</code>.</li>
 </ul>
 <p>There is a couple of ways that the method can be called, depending on which plugin events need to be configured. </p>
 <ul>
@@ -283,7 +283,7 @@ func run(*node.Plugin) {
 <h2 id="running-new-plugin"><a class="header" href="#running-new-plugin">Running new plugin</a></h2>
 <p>In order to correctly add a new plugin to GoShimmer, apart from defining it, it must also be passed to the <code>node.Run</code> method. 
 Because there are plenty of plugins, in order to improve readability and make managing plugins easier, they are grouped into separate wrappers passed to the <code>node.Run</code> method. 
-When adding new plugin, it must be added into one of those groups, or a new group must be created.</p>
+When adding a new plugin, it must be added into one of those groups, or a new group must be created.</p>
 <pre><code class="language-go">node.Run(
     plugins.Core,
     plugins.Research,
@@ -291,7 +291,7 @@ When adding new plugin, it must be added into one of those groups, or a new grou
     plugins.WebAPI,
 )
 </code></pre>
-<p>You can add plugin simply by calling <code>Plugin()</code> method of the newly created plugin and passing the argument further. An example group definition is presented below. When it's added, the plugin is correctly added and will be run when GoShimmer starts.</p>
+<p>You can add a plugin simply by calling the <code>Plugin()</code> method of the newly created plugin and passing the argument further. An example group definition is presented below. When it's added, the plugin is correctly added and will be run when GoShimmer starts.</p>
 <pre><code class="language-go">var Core = node.Plugins(
     banner.Plugin(),
     newPlugin.Plugin(),
@@ -300,7 +300,7 @@ When adding new plugin, it must be added into one of those groups, or a new grou
 </code></pre>
 <h2 id="background-workers"><a class="header" href="#background-workers">Background workers</a></h2>
 <p>In order to run plugins beyond the scope of the short-lived <code>Run</code> event handler, possibly multiple <code>daemon.BackgroundWorker</code> instances can be started inside the handler function. 
-This allows the <code>Run</code> event handler finish quickly, and the plugin logic can continue running concurrently in a separate goroutine. </p>
+This allows the <code>Run</code> event handler to finish quickly, and the plugin logic can continue running concurrently in a separate goroutine. </p>
 <p>Background worker can be started by running the <code>daemon.BackgroundWorker</code> method, which accepts following arguments:</p>
 <ul>
 <li><code>name string</code> - background worker name</li>
@@ -312,7 +312,7 @@ Correct shutdown order is as important as correct start order, because different
 </ul>
 <p>An example code for creating a background worker: </p>
 <pre><code class="language-go">func start(shutdownSignal &lt;-chan struct{}) {
-	// long running function
+	// long-running function
 	// possibly start goroutines here
 	// wait for shutdown signal
     &lt;-shutdownSignal
@@ -334,7 +334,7 @@ if err := daemon.BackgroundWorker(backgroundWorkerName, start, shutdown.Priority
                         
 
                         
-                            <a rel="next" href="../implementation_design/plugin/init.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../implementation_design/object_storage.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -352,7 +352,7 @@ if err := daemon.BackgroundWorker(backgroundWorkerName, start, shutdown.Priority
                 
 
                 
-                    <a rel="next" href="../implementation_design/plugin/init.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../implementation_design/object_storage.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
