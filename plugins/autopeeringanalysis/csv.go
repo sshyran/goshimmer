@@ -13,24 +13,21 @@ var (
 var TableDescription = []string{
 	"Time",
 	"KnownPeers",
-	"InboundNeighbors",
-	"OutboundNeighbors",
+	"Neighbors",
 }
 
 // AutopeeringInfo holds the information of the autopeering.
 type AutopeeringInfo struct {
-	Time              time.Time
-	KnownPeers        int
-	InboundNeighbors  int
-	OutboundNeighbors int
+	Time       time.Time
+	KnownPeers int
+	Neighbors  int
 }
 
 func (a AutopeeringInfo) toCSV() (row []string) {
 	row = append(row, []string{
 		fmt.Sprint(a.Time.UnixNano()),
 		fmt.Sprint(a.KnownPeers),
-		fmt.Sprint(a.InboundNeighbors),
-		fmt.Sprint(a.OutboundNeighbors)}...)
+		fmt.Sprint(a.Neighbors)}...)
 
 	return
 }

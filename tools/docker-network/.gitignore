@@ -1,3 +1,4 @@
 *.txt
 grafana/grafana.db
 grafana/png
+autopeering-analysis.csv
