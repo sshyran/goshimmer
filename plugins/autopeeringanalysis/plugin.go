@@ -87,13 +87,10 @@ func configureEvents() error {
 
 	// log the peer discovery events
 	peerDisc.Events().PeerDiscovered.Attach(events.NewClosure(func(ev *discover.DiscoveredEvent) {
-		log.Info("-------------PeerDiscovered--------------------")
 		apInfoMutex.Lock()
 		defer apInfoMutex.Unlock()
-
 		apInfo.Time = time.Now()
 		apInfo.KnownPeers++
-		log.Info(apInfo.toCSV())
 		if err := w.Write(apInfo.toCSV()); err != nil {
 			log.Error(err)
 		}
@@ -102,10 +99,8 @@ func configureEvents() error {
 	peerDisc.Events().PeerDeleted.Attach(events.NewClosure(func(ev *discover.DeletedEvent) {
 		apInfoMutex.Lock()
 		defer apInfoMutex.Unlock()
-
 		apInfo.Time = time.Now()
 		apInfo.KnownPeers--
-		log.Info(apInfo.toCSV())
 		if err := w.Write(apInfo.toCSV()); err != nil {
 			log.Error(err)
 		}
@@ -113,13 +108,11 @@ func configureEvents() error {
 
 	peerSel.Events().OutgoingPeering.Attach(events.NewClosure(func(ev *selection.PeeringEvent) {
 		if ev.Status {
-			log.Info("-------------OutgoingPeering--------------------")
 			apInfoMutex.Lock()
 			defer apInfoMutex.Unlock()
 
 			apInfo.Time = time.Now()
 			apInfo.Neighbors++
-			log.Info(apInfo.toCSV())
 			if err := w.Write(apInfo.toCSV()); err != nil {
 				log.Error(err)
 			}
@@ -127,13 +120,11 @@ func configureEvents() error {
 	}))
 	peerSel.Events().IncomingPeering.Attach(events.NewClosure(func(ev *selection.PeeringEvent) {
 		if ev.Status {
-			log.Info("-------------IncomingPeering--------------------")
 			apInfoMutex.Lock()
 			defer apInfoMutex.Unlock()
 
 			apInfo.Time = time.Now()
 			apInfo.Neighbors++
-			log.Info(apInfo.toCSV())
 			if err := w.Write(apInfo.toCSV()); err != nil {
 				log.Error(err)
 			}
@@ -142,10 +133,8 @@ func configureEvents() error {
 	peerSel.Events().Dropped.Attach(events.NewClosure(func(ev *selection.DroppedEvent) {
 		apInfoMutex.Lock()
 		defer apInfoMutex.Unlock()
-
 		apInfo.Time = time.Now()
 		apInfo.Neighbors--
-		log.Info(apInfo.toCSV())
 		if err := w.Write(apInfo.toCSV()); err != nil {
 			log.Error(err)
 		}
