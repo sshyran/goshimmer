@@ -182,7 +182,7 @@
 <p>More details on how to set up the dashboard can be found <a href="https://github.com/iotaledger/goshimmer/wiki/Setup-up-a-GoShimmer-node-(Joining-the-pollen-testnet)#setting-up-the-grafana-dashboard">here</a>.</p>
 <p>The peers can communicate freely within the Docker network 
 while the analysis and visualizer dashboard, as well as the <code>master_peer's</code> dashboard and web API are reachable from the host system on the respective ports.</p>
-<p>The settings for the different containers (<code>entry_node</code>, <code>peer_master</code>, <code>peer_replica</code>) can be modified in <code>docker-compose.yml</code>. </p>
+<p>The settings for the different containers (<code>entry_node</code>, <code>peer_master</code>, <code>peer_replica</code>) can be modified in <code>docker-compose.yml</code>.</p>
 <h2 id="how-to-use-as-development-tool"><a class="header" href="#how-to-use-as-development-tool">How to use as development tool</a></h2>
 <p>Using a standalone throwaway Docker network can be really helpful as a development tool. </p>
 <p>Prerequisites: </p>
@@ -220,6 +220,34 @@ Copied files are located at ./csv
 ...
 </code></pre>
 <p>Note, that the record length of the files might differ, since the approval check execution time of the nodes might differ.</p>
+<h2 id="spammer-tool"><a class="header" href="#spammer-tool">Spammer tool</a></h2>
+<p>The Spammer tool lets you add messages to the tangle when running GoShimmer in a Docker network.
+In order to start the spammer, you need to send GET requests to a <code>/spammer</code> API endpoint with the following parameters:</p>
+<ul>
+<li><code>cmd</code> - one of two possible values: <code>start</code> and <code>shutdown</code>.</li>
+<li><code>mpm</code> - messages per minute. Only applicable when <code>cmd=start</code>. </li>
+<li><code>imif</code> - (<em>optional</em>) parameter indicating time interval between issued messages. Possible values:
+<ul>
+<li><code>poisson</code> - emit messages modeled with Poisson point process, whose time intervals are exponential variables with mean 1/rate</li>
+<li><code>uniform</code> - issues messages at constant rate</li>
+</ul>
+</li>
+</ul>
+<p>Example requests:</p>
+<pre><code class="language-bash">http://localhost:8080/spammer?cmd=start&amp;mpm=1000
+
+http://localhost:8080/spammer?cmd=start&amp;mpm=1000&amp;imif=uniform
+http://localhost:8080/spammer?cmd=shutdown
+</code></pre>
+<h2 id="tangle-width"><a class="header" href="#tangle-width">Tangle width</a></h2>
+<p>When running GoShimmer locally in a Docker network, the network delay is so small that only 1 tip will be available most of the time. 
+In order to artificially create a tangle structure with multiple tips you can add a <code>messageLayer.tangleWidth</code> property to <a href="tools/docker-network/config.docker.json">config.docker.json</a>
+that specifies the number of tips that nodes should retain. This setting exists only for local testing purposes and should not be used in a distributed testnet.</p>
+<p>Here is an example config that can be added: </p>
+<pre><code class="language-json">  &quot;messageLayer&quot;: {
+    &quot;tangleWidth&quot;: 10
+  },
+</code></pre>
 
                     </main>
 
