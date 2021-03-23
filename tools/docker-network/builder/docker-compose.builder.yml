@@ -10,6 +10,10 @@ services:
       - ../../..:/tmp/goshimmer:ro
       - goshimmer-cache:/go
 #      - ../../../../hive.go:/tmp/hive.go:ro
+  
+  adversary_replica:
+    container_name: adversary_replica
+    image: autopeering-attack
 
 volumes:
   goshimmer-cache:

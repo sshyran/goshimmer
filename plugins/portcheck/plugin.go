@@ -63,7 +63,7 @@ func checkAutopeeringConnection() {
 	srv := server.Serve(local.GetInstance(), conn, log, disc)
 	defer srv.Close()
 
-	disc.Start(srv)
+	disc.Start(srv, srv)
 	defer disc.Close()
 
 	for _, master := range autopeering.Discovery().GetMasterPeers() {

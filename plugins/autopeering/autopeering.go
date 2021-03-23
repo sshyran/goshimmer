@@ -148,7 +148,7 @@ func start(shutdownSignal <-chan struct{}) {
 	defer srv.Close()
 
 	// start the peer discovery on that connection
-	Discovery().Start(srv)
+	Discovery().Start(srv, srv)
 	srvBarrier.c <- srv
 
 	log.Infof("%s started: ID=%s Address=%s/%s", PluginName, lPeer.ID(), localAddr.String(), localAddr.Network())
