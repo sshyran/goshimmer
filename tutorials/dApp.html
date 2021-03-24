@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Writing a dApp - IOTA GoShimmer</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../goshimmer.html"><strong aria-hidden="true">1.</strong> GoShimmer</a></li><li class="chapter-item expanded "><a href="../faq.html"><strong aria-hidden="true">2.</strong> FAQ</a></li><li class="chapter-item expanded "><a href="../tutorials.html"><strong aria-hidden="true">3.</strong> Tutorials</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tutorials/setup.html"><strong aria-hidden="true">3.1.</strong> Setting up a GoShimmer node</a></li><li class="chapter-item expanded "><a href="../tutorials/request_funds.html"><strong aria-hidden="true">3.2.</strong> Obtaining tokens from the faucet</a></li><li class="chapter-item expanded "><a href="../tutorials/wallet.html"><strong aria-hidden="true">3.3.</strong> The wallet library</a></li><li class="chapter-item expanded "><a href="../tutorials/dApp.html" class="active"><strong aria-hidden="true">3.4.</strong> Writing a dApp</a></li><li class="chapter-item expanded "><a href="../tutorials/syncbeacon.html"><strong aria-hidden="true">3.5.</strong> How to run a sync beacon</a></li><li class="chapter-item expanded "><a href="../tutorials/follow_syncbeacon.html"><strong aria-hidden="true">3.6.</strong> How to configure followed sync beacon nodes</a></li><li class="chapter-item expanded "><a href="../tutorials/static_identity.html"><strong aria-hidden="true">3.7.</strong> How to create a static identity</a></li><li class="chapter-item expanded "><a href="../tutorials/custom_dRNG.html"><strong aria-hidden="true">3.8.</strong> How to setup a custom dRNG committee</a></li><li class="chapter-item expanded "><a href="../tutorials/monitoring.html"><strong aria-hidden="true">3.9.</strong> Setting up Monitoring Dashboard</a></li></ol></li><li class="chapter-item expanded "><a href="../application_logic.html"><strong aria-hidden="true">4.</strong> Application logic</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../application_logic/protocol.html"><strong aria-hidden="true">4.1.</strong> Protocol high level overview</a></li></ol></li><li class="chapter-item expanded "><a href="../implementation_design.html"><strong aria-hidden="true">5.</strong> Implementation design</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../implementation_design/event_driven_model.html"><strong aria-hidden="true">5.1.</strong> Event driven model</a></li><li class="chapter-item expanded "><a href="../implementation_design/packages_plugins.html"><strong aria-hidden="true">5.2.</strong> Packages and plugins</a></li><li class="chapter-item expanded "><a href="../implementation_design/plugin.html"><strong aria-hidden="true">5.3.</strong> Plugin</a></li><li class="chapter-item expanded "><a href="../implementation_design/configuration_parameters.html"><strong aria-hidden="true">5.4.</strong> Configuration parameters</a></li><li class="chapter-item expanded "><a href="../implementation_design/object_storage.html"><strong aria-hidden="true">5.5.</strong> Object storage</a></li></ol></li><li class="chapter-item expanded "><a href="../api.html"><strong aria-hidden="true">6.</strong> API</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../apis/api.html"><strong aria-hidden="true">6.1.</strong> Client Lib</a></li><li class="chapter-item expanded "><a href="../apis/webAPI.html"><strong aria-hidden="true">6.2.</strong> WebAPI</a></li><li class="chapter-item expanded "><a href="../apis/mana.html"><strong aria-hidden="true">6.3.</strong> Mana</a></li><li class="chapter-item expanded "><a href="../apis/dRNG.html"><strong aria-hidden="true">6.4.</strong> dRNG</a></li><li class="chapter-item expanded "><a href="../apis/communication.html"><strong aria-hidden="true">6.5.</strong> Communication</a></li><li class="chapter-item expanded "><a href="../apis/value.html"><strong aria-hidden="true">6.6.</strong> Value layer</a></li></ol></li><li class="chapter-item expanded "><a href="../tooling.html"><strong aria-hidden="true">7.</strong> Tooling</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tooling/docker_private_network.html"><strong aria-hidden="true">7.1.</strong> Docker private network</a></li></ol></li><li class="chapter-item expanded "><a href="../specification.html"><strong aria-hidden="true">8.</strong> Specification of Implementation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../specification/001-mana.html"><strong aria-hidden="true">8.1.</strong> Mana</a></li><li class="chapter-item expanded "><a href="../specification/003-markers.html"><strong aria-hidden="true">8.2.</strong> Markers</a></li></ol></li><li class="chapter-item expanded "><a href="../concepts.html"><strong aria-hidden="true">9.</strong> Concepts</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../concepts/glossary.html"><strong aria-hidden="true">9.1.</strong> Glossary</a></li><li class="chapter-item expanded "><a href="../concepts/layers.html"><strong aria-hidden="true">9.2.</strong> Layers</a></li></ol></li><li class="chapter-item expanded "><a href="../team_resources.html"><strong aria-hidden="true">10.</strong> Team Resources</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../teamresources/release.html"><strong aria-hidden="true">10.1.</strong> How to do a release</a></li><li class="chapter-item expanded "><a href="../teamresources/guidelines.html"><strong aria-hidden="true">10.2.</strong> Code Guidelines</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">IOTA GoShimmer</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/iotaledger/goshimmer" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="how-to-create-a-simple-dapp"><a class="header" href="#how-to-create-a-simple-dapp">How to create a simple dApp</a></h1>
+<blockquote>
+<p>This guide is meant for developers familiar with the Go programming language.</p>
+</blockquote>
+<blockquote>
+<p><strong>DISCLAIMER:</strong> GoShimmer is a rapidly evolving prototype software. As such, the described steps here will likely change in the future. Specifically, we are envisioning to ease the process of dApp creation and installation for node owners. Furthermore, the current approach is in no way hardened and should be seen as purely experimental. Do not write any software for actual production use.</p>
+</blockquote>
+<h2 id="network-delay-dapp"><a class="header" href="#network-delay-dapp">Network Delay dApp</a></h2>
+<p>In this guide we are going to explain how to write a very simple dApp based on an actual dApp we are using in GoShimmer to help us measure the network delay, i.e., how long it takes for every active node in the network to receive a message. Gathering this data will enable us to set realistic parameters for FCoB.</p>
+<p>The complete source code of the application can be found <a href="https://github.com/iotaledger/goshimmer/tree/develop/dapps/networkdelay">in the repository</a>. </p>
+<h3 id="overview"><a class="header" href="#overview">Overview</a></h3>
+<p>Our network delay dApp should help us to identify the time it takes for every active node to receive and process a message. That can be done in a few simple steps:</p>
+<ol>
+<li>A (known) node sends a special message containing a network delay object.</li>
+<li>Upon receipt, every other node in the network answers to the special message by posting its current time to our remote logger.</li>
+<li>For simplicity we gather the information in an <a href="https://www.elastic.co/what-is/elk-stack">ELK stack</a>. This helps us to easily interpret and analyze the data.</li>
+</ol>
+<p>Within GoShimmer we need 3 components to realize this undertaking. First, we need to <strong>define and register a network delay object type</strong>. Second, we need a way to <strong>initiate a message</strong> with a network delay object via the web API. And lastly, we need to <strong>listen</strong> for network delay objects and take appropriate action.</p>
+<p>If a node does not have our dApp installed and activated, the message will be simply treated as a raw data message without any particular meaning. In general that means that in order for a dApp to be useful, node owners need to explicitly install it. In our case we simply ship it with GoShimmer.</p>
+<h3 id="define--register-the-network-delay-object"><a class="header" href="#define--register-the-network-delay-object">Define &amp; Register The Network Delay Object</a></h3>
+<p>First, we need to decide what data our network delay object should contain and define the byte layout accordingly.
+In our case we need an <code>ID</code> to identify a network delay message and the <code>sent time</code> of the initiator. 
+Therefore, we can define the byte layout as follows:</p>
+<pre><code>type&lt;uint32-4bytes&gt; // every object has to have this
+length&lt;uint32-4bytes&gt; // every object has to have this
+id&lt;32bytes&gt;
+sentTime&lt;int64-8bytes&gt;
+</code></pre>
+<p>Next, we need to fulfill the <code>Payload</code> interface and provide the functionality to read/write an object from/to bytes. The <a href="https://github.com/iotaledger/hive.go/tree/master/marshalutil"><code>hive.go/marshalutil</code></a> package simplifies this step tremendously.</p>
+<pre><code class="language-Go">type Payload interface {
+	// Type returns the type of the payload.
+	Type() Type
+	// Bytes returns the payload bytes.
+	Bytes() []byte
+	// Unmarshal unmarshals the payload from the given bytes.
+	Unmarshal(bytes []byte) error
+	// String returns a human-friendly representation of the payload.
+	String() string
+}
+</code></pre>
+<p>Finally, we need to register our network delay object type so that it can be properly unmarshalled. </p>
+<pre><code class="language-Go">func init() {
+	payload.RegisterType(Type, func(data []byte) (payload payload.Payload, err error) {
+		payload = &amp;Object{}
+		err = payload.Unmarshal(data)
+
+		return
+	})
+}
+</code></pre>
+<h3 id="create-the-web-api-endpoints"><a class="header" href="#create-the-web-api-endpoints">Create The Web API Endpoints</a></h3>
+<p>In order to issue a message with our newly created network delay object, we need to create a web API endpoint. Here we simply create a random <code>ID</code> and the <code>sentTime</code> and then issue a message with <code>issuer.IssuePayload()</code>. This plugin takes care of all the specifics and employs the <code>MessageFactory</code> to, i.a., select tips and sign the message.</p>
+<pre><code class="language-Go">webapi.Server.POST(&quot;networkdelay&quot;, broadcastNetworkDelayObject)
+
+func broadcastNetworkDelayObject(c echo.Context) error {
+	// generate random id
+	rand.Seed(time.Now().UnixNano())
+	var id [32]byte
+	if _, err := rand.Read(id[:]); err != nil {
+		return c.JSON(http.StatusInternalServerError, Response{Error: err.Error()})
+	}
+
+	msg, err := issuer.IssuePayload(NewObject(id, time.Now().UnixNano()))
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, Response{Error: err.Error()})
+	}
+	return c.JSON(http.StatusOK, Response{ID: msg.Id().String()})
+}
+</code></pre>
+<h3 id="listen-for-network-delay-objects"><a class="header" href="#listen-for-network-delay-objects">Listen for network delay objects</a></h3>
+<p>Every dApp listens for messages from the <em>communication layer</em> and when its data type is detected, takes appropriate action. For us that means listening for network delay objects and sending messages to our remote logger if we encounter any. Of course in this context, we only want to react to network delay objects which were issued by our analysis/entry node server. Therefore, matching the message signer's public key with a configured public key lets us only react to the appropriate network delay objects.</p>
+<pre><code class="language-Go">// subscribe to message-layer
+messagelayer.Tangle.Events.MessageSolid.Attach(events.NewClosure(onReceiveMessageFromMessageLayer))
+
+func onReceiveMessageFromMessageLayer(cachedMessage *message.CachedMessage, cachedMessageMetadata *messageTangle.CachedMessageMetadata) {
+	defer cachedMessage.Release()
+	defer cachedMessageMetadata.Release()
+
+	solidMessage := cachedMessage.Unwrap()
+	if solidMessage == nil {
+		log.Debug(&quot;failed to unpack solid message from message layer&quot;)
+
+		return
+	}
+
+	messagePayload := solidMessage.Payload()
+	if messagePayload.Type() != Type {
+		return
+	}
+
+	// check for node identity -&gt; only answer if it's send from a configured node
+	issuerPubKey := solidMessage.IssuerPublicKey()
+	if issuerPubKey != originPublicKey || issuerPubKey == myPublicKey {
+		return
+	}
+
+	// make sure we really got a message with our type. 
+	// since we are in a distributed setting anyone could send a message with our type id and put other data in it.
+	networkDelayObject, ok := messagePayload.(*Object)
+	if !ok {
+		log.Info(&quot;could not cast payload to network delay object&quot;)
+
+		return
+	}
+
+	now := time.Now().UnixNano()
+
+	sendToRemoteLog(networkDelayObject, now)
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../tutorials/wallet.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../tutorials/syncbeacon.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../tutorials/wallet.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../tutorials/syncbeacon.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
