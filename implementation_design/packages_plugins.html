@@ -167,7 +167,19 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="packages-and-plugins"><a class="header" href="#packages-and-plugins">Packages and plugins</a></h1>
+                        <h1 id="dependency-of-packages-and-plugins"><a class="header" href="#dependency-of-packages-and-plugins">Dependency of packages and plugins</a></h1>
+<p>In GoShimmer, new features are added through the <a href="plugin.html">plugin system</a>.
+When creating a new plugin, it must implement an interface shared with all other plugins, so it's easy to add new
+plugins and change their internal implementation without worrying about compatibility. 
+Because of this, to make the code clean and easily manageable the plugin's internal logic has to be implemented in a different package.
+This is an example of an <a href="https://en.wikipedia.org/wiki/Adapter_pattern">adapter design pattern</a> that is often used in plugin systems.
+It's really useful in a prototype software like GoShimmer, because it's possible to easily switch between different implementations 
+and internal interfaces just by using a different plugin, without having to rewrite the code using it. </p>
+<p>When creating a new plugin, the logic should be implemented in a separate package stored in the <code>packages/</code> directory. 
+The package should contain all struct and interface definitions used, as well as the specific logic. 
+It should not reference any <code>plugin</code> packages from the <code>plugin/</code> directory as this could lead to circular dependencies between packages.</p>
+<p>There are no special interfaces or requirements that packages in the <code>packages/</code> directory are forced to follow. However, they should be independent of other packages if possible, 
+to avoid problems due to changing interfaces in other packages.</p>
 
                     </main>
 
