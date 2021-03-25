@@ -188,6 +188,27 @@ golangci-lint is very flexible and customizable. Check the docs to see how confi
 <li>Change linter settings to make it more relaxed. </li>
 <li>Disable that particular error occurrence: use a comment with a special <code>nolint</code> directive next to the place in code with the error. Example: <code>// nolint: errcheck</code>.</li>
 </ul>
+<h1 id="docker"><a class="header" href="#docker">Docker</a></h1>
+<h2 id="building-image"><a class="header" href="#building-image">Building image</a></h2>
+<p>We use the new buildkit docker engine to build <code>iotaledger/goshimmer</code> image. 
+The minimum required docker version that supports this feature is <code>18.09</code>. 
+To enable buildkit engine in your local docker add the following to the docker configuration json file:</p>
+<pre><code class="language-json">{ &quot;features&quot;: { &quot;buildkit&quot;: true } }
+</code></pre>
+<p>Check this <a href="https://docs.docker.com/develop/develop-images/build_enhancements/#to-enable-buildkit-builds">article</a> for details on how to do that.</p>
+<h3 id="troubleshooting"><a class="header" href="#troubleshooting">Troubleshooting</a></h3>
+<p>If you are getting an error like that during the docker build:</p>
+<pre><code class="language-dockerfile">Step 10/17 : RUN --mount=target=.     --mount=type=cache,target=/root/.cache/go-build     CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build     -ldflags='-w -s -extldflags &quot;-static&quot;'     -o /go/bin/goshimmer;     ./check_static.sh
+ ---&gt; Running in ecdae1c9339d
+no Go files in /goshimmer
+/bin/sh: 1: ./check_static.sh: not found
+The command '/bin/sh -c CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build     -ldflags='-w -s -extldflags &quot;-static&quot;'     -o /go/bin/goshimmer;     ./check_static.sh' returned a non-zero code: 127
+</code></pre>
+<p>It means that buildkit feature doesn't work in your docker. 
+If you already enabled it in the configuration json file as described above and docker version is <code>18.09</code> or higher, 
+try to set the following env variables when building the docker image:</p>
+<pre><code>DOCKER_BUILDKIT=1 COMPOSE_DOCKER_CLI_BUILD=1 docker build -t iotaledger/goshimmer .
+</code></pre>
 
                     </main>
 
